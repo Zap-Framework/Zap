@@ -14,39 +14,19 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap.engine.ext;
+package com.zap.util;
 
 import com.zap.engine.Engine;
-import com.zap.util.Constants;
+import java.util.ArrayList;
 
 /**
- *
+ * Container for a new type of list exclusive to Mini games to prevent
+ * mixing up different types of elements in the engine
+ * 
  * @author Faris
  */
-public class NetworkEngine extends Engine {
+public class EngineList<E extends Engine> extends ArrayList<E> {
+
+    // ALLOW USAGE OF A LIST WITH EXCLUSIVITY TO Client TYPES ONLY
     
-    public NetworkEngine(){
-        super(Constants.NETWORK_EXECUTION_RATE);
-    }
-
-    @Override
-    public void fire() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void interrupt() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void run() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void execution() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
 }

@@ -47,7 +47,9 @@ public abstract class Engine implements Runnable {
     /**
      * stops the life cycle of the running engine
      */
-    public abstract void interrupt();
+    public  void interrupt(){
+        this.setRunning(false);
+    };
     
     /**
      * Handles the main responsibilities of the instantiated engine

@@ -17,11 +17,6 @@
 package com.zap.engine.ext;
 
 import com.zap.engine.Engine;
-import com.zap.game.content.minigame.Minigame;
-import com.zap.util.Constants;
-import com.zap.util.MinigameList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,47 +24,16 @@ import java.util.logging.Logger;
  *
  * @author Faris
  */
-public class MinigameEngine extends Engine {
+public class CleanUpEngine extends Engine {
     
-    public MinigameEngine(){
-        super(Constants.GAME_EXECUTION_RATE);
-    }
-    
-    /**
-     * List containing all of the active games waiting to start
-     */
-    public static List<Minigame> gamesToBegin = new MinigameList();
-    
-    /**
-     * List containing all of the currently active games
-     */
-    public static List<Minigame> activeGames = new MinigameList();
-
-    @Override
-    public void interrupt() {
-        this.setRunning(false);
+    public CleanUpEngine(){
+        super(5000);
     }
 
     @Override
     public void execution() {
-        if(activeGames.isEmpty()){
-            return;
-        }
-        Iterator<Minigame> it = activeGames.iterator();
-        while(it.hasNext()){
-            Minigame game = it.next();
-            if(game.gameShouldEnd()){
-                activeGames.remove(game);
-            }
-            game.process();
-        }
-        if(gamesToBegin.isEmpty()){
-            return;
-        }
-        for(Minigame game : gamesToBegin){
-            activeGames.add(game);
-        }
-        gamesToBegin.clear();
+        System.gc();
+        System.runFinalization();
     }
 
     @Override
