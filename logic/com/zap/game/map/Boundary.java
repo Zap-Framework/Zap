@@ -14,20 +14,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap;
+package com.zap.game.map;
 
 /**
- * 
+ *
  * @author Faris
  */
-public class Zap {
-
-	public static void main(String[] args) {
-		new Zap().start();
-	}
-
-	public void start() {
-
-	}
+public class Boundary {
 
 }

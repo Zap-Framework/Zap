@@ -14,20 +14,19 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap;
+package com.zap.util;
+
+import com.zap.game.content.minigame.Minigame;
+import java.util.ArrayList;
 
 /**
+ * Container for a new type of list exclusive to Mini games to prevent
+ * mixing up different types of elements in the engine
  * 
  * @author Faris
  */
-public class Zap {
+public class MinigameList<E extends Minigame> extends ArrayList<E> {
 
-	public static void main(String[] args) {
-		new Zap().start();
-	}
-
-	public void start() {
-
-	}
-
+    // ALLOW USAGE OF A LIST WITH EXCLUSIVITY TO Client TYPES ONLY
+    
 }

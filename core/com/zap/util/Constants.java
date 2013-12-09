@@ -14,20 +14,27 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap;
+package com.zap.util;
 
 /**
- * 
+ *
  * @author Faris
  */
-public class Zap {
-
-	public static void main(String[] args) {
-		new Zap().start();
-	}
-
-	public void start() {
-
-	}
+public class Constants {
+    
+    /**
+     * The Server Port 
+     */
+    public static final int SERVER_PORT = 43594;
+    
+    /**
+     * The Game Cycle Rate
+     */
+    public static final int GAME_EXECUTION_RATE = 600;
+    
+    /**
+     * The Network Cycle Rate
+     */
+    public static final int NETWORK_EXECUTION_RATE = 50;
 
 }

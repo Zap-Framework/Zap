@@ -14,20 +14,34 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap;
+package com.zap.engine.ext;
+
+import com.zap.engine.Engine;
+import com.zap.util.Constants;
 
 /**
- * 
+ *
  * @author Faris
  */
-public class Zap {
+public class ZapEngine extends Engine {
+    
+    public ZapEngine(){
+        super(Constants.GAME_EXECUTION_RATE);
+    }
 
-	public static void main(String[] args) {
-		new Zap().start();
-	}
+    @Override
+    public void interrupt() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public void start() {
+    @Override
+    public void execution() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	}
+    @Override
+    public void run() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
 }
