@@ -16,6 +16,7 @@
  */
 package com.zap.engine.ext;
 
+import com.zap.NetworkInitiator;
 import com.zap.engine.Engine;
 import com.zap.util.Constants;
 
@@ -30,23 +31,13 @@ public class NetworkEngine extends Engine {
     }
 
     @Override
-    public void fire() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void interrupt() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        execution();
     }
 
     @Override
     public void execution() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        new NetworkInitiator(Constants.SERVER_PORT).constructLoginStreams();
     }
 
 }

@@ -16,6 +16,10 @@
  */
 package com.zap.engine;
 
+import com.zap.engine.ext.MinigameEngine;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Faris
@@ -55,6 +59,21 @@ public abstract class Engine implements Runnable {
      * Handles the main responsibilities of the instantiated engine
      */
     public abstract void execution();
+    
+    /**
+     * The basic run function for each instantiated engine
+     */
+    @Override
+    public void run(){
+        while(this.isRunning()){
+            execution();
+            try {
+                Thread.sleep(this.getFrequency());
+            } catch (InterruptedException ex) {
+                Logger.getLogger(MinigameEngine.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
     /**
      * @return the isRunning

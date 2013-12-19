@@ -16,40 +16,26 @@
  */
 package com.zap.util;
 
+import com.zap.Zap;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Faris
  */
-public class Constants {
+public class GameUtilities {
     
     /**
-     * The Server Port 
+     * A logger used to report error messages.
      */
-    public static final int SERVER_PORT = 43594;
+    private static final Logger logger = Logger.getLogger(Zap.class.getName());
     
     /**
-     * The Game Cycle Rate
+     * Prints any required message to the command prompt
+     * @param msg the input field
      */
-    public static final int GAME_EXECUTION_RATE = 600;
-    
-    /**
-     * The Network Cycle Rate
-     */
-    public static final int NETWORK_EXECUTION_RATE = 50;
-    
-    /**
-     * The Network Buffer Size
-     */
-    public static final int  BUFFER_SIZE = 512;
-    
-    /**
-     * The Maximum amount of Players Allowed online
-     */
-    public static final int MAX_PLAYERS = 2000;
-    
-    /**
-     * The Server Name
-     */
-    public static final String SERVER_NAME = "Zap";
+    public static void print(String msg){
+        logger.info(msg);
+    }
 
 }

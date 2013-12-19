@@ -16,18 +16,43 @@
  */
 package com.zap;
 
+import com.zap.engine.EngineServer;
+import com.zap.engine.ext.NetworkEngine;
+import com.zap.util.Constants;
+import java.util.logging.Logger;
+
 /**
  * 
  * @author Faris
  */
 public class Zap {
-
+    
+        /**
+         * A logger used to report error messages.
+         */
+        public static final Logger logger = Logger.getLogger(Zap.class.getName());
+        
+        /**
+         * Whether the server requires an update
+         */
+        public static boolean updateServer = false;
+        
+        /**
+         * The Engine Server
+         */
+        public static EngineServer engineServer;
+        
 	public static void main(String[] args) {
 		new Zap().start();
 	}
 
 	public void start() {
-            // addshutdown hook task
+            logger.info("Starting up Zap on Port:" +Constants.SERVER_PORT);
+            engineServer =  new EngineServer();
+            engineServer.initialize();
+            logger.info("Fired up Engine Server...");
+            EngineServer.submitEngine(new NetworkEngine());
+            logger.info("Fired up Netty Login Server...");
 	}
 
 }
