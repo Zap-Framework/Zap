@@ -48,6 +48,11 @@ public class Constants {
     public static final int MAX_PLAYERS = 2000;
     
     /**
+     * The Maximum amount of NPCs Allowed online
+     */
+    public static final int MAX_NPCS = 5000;
+    
+    /**
      * The Server Name
      */
     public static final String SERVER_NAME = "Zap";

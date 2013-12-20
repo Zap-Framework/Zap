@@ -16,8 +16,8 @@
  */
 package com.zap.engine.ext;
 
+import com.zap.Zap;
 import com.zap.engine.Engine;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -26,26 +26,20 @@ import java.util.logging.Logger;
  */
 public class CleanUpEngine extends Engine {
     
+    /**
+     * A logger used to report error messages.
+     */
+    public static final Logger logger = Logger.getLogger(Zap.class.getName());
+    
     public CleanUpEngine(){
-        super(5000);
+        super(60000);
     }
 
     @Override
     public void execution() {
         System.gc();
         System.runFinalization();
-    }
-
-    @Override
-    public void run() {
-        while(this.isRunning()){
-            execution();
-            try {
-                Thread.sleep(this.getFrequency());
-            } catch (InterruptedException ex) {
-                Logger.getLogger(MinigameEngine.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        logger.info("Framework Clean up has Succesfully executed.");
     }
 
 }

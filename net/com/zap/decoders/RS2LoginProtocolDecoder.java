@@ -17,9 +17,8 @@ package com.zap.decoders;
 
 import com.zap.LoginState;
 import com.zap.Zap;
-import com.zap.game.player.Player;
-import com.zap.game.player.PlayerHandler;
-import com.zap.game.player.PlayerSave;
+import com.zap.game.entity.player.Player;
+import com.zap.game.entity.player.PlayerSave;
 import com.zap.packet.PacketBuilder;
 import com.zap.util.Constants;
 import com.zap.util.NetUtilities;
@@ -113,8 +112,8 @@ public class RS2LoginProtocolDecoder extends FrameDecoder {
             returnCode = 8;
         }
         Player player = new Player(channel, -1);
-        player.playerName = name;
-        player.playerName2 = player.playerName;
+        player.setPlayerName(name);
+        player.playerName2 = player.getPlayerName();
         player.playerPass = pass;
         player.outStream.packetEncryption = outCipher;
         player.saveCharacter = false;
@@ -123,17 +122,17 @@ public class RS2LoginProtocolDecoder extends FrameDecoder {
         // if (Connection.isNamedBanned(cl.playerName)) {
         //         returnCode = 4;
         // }
-        if (PlayerHandler.isPlayerOn(name)) {
+        if (Zap.getWorld().getPlayerByName(name) != null) {
             returnCode = 5;
         }
-        if (PlayerHandler.getPlayerCount() >= Constants.MAX_PLAYERS) {
+        if (Zap.getWorld().getOnlinePlayers() >= Constants.MAX_PLAYERS) {
             returnCode = 7;
         }
         if (Zap.updateServer) {
             returnCode = 14;
         }
         if (returnCode == 2) {
-            int load = PlayerSave.loadGame(player, player.playerName, player.playerPass);
+            int load = PlayerSave.loadGame(player, player.getPlayerName(), player.playerPass);
             if (load == 0) {
                 //  cl.addStarter = true;
             }
@@ -147,7 +146,7 @@ public class RS2LoginProtocolDecoder extends FrameDecoder {
                  cl.playerEquipmentN[i] = 0;
                  }
                  }*/
-                if (!PlayerHandler.newPlayerClient(player)) {
+                if (!Zap.getWorld().registerEntity(player)) {
                     returnCode = 7;
                     //cl.saveFile = false;
                 } else {
@@ -173,7 +172,7 @@ public class RS2LoginProtocolDecoder extends FrameDecoder {
             sendReturnCode(channel, returnCode);
             return null;
         }
-        synchronized (PlayerHandler.lock) {
+        synchronized (new Object()) {
             player.initialize();
             player.initialized = true;
         }

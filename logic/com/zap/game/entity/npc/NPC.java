@@ -14,16 +14,18 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap.game.player;
+package com.zap.game.entity.npc;
+
+import com.zap.game.entity.Entity;
 
 /**
  *
  * @author Faris
  */
-public class PlayerSave {
-
-    public static int loadGame(Player player, String playerName, String playerPass) {
-        throw new UnsupportedOperationException("Not yet implemented");
+public class NPC extends Entity {
+    
+    public NPC(){
+        this.setType(Type.NPC);
     }
 
 }

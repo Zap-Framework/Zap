@@ -22,8 +22,6 @@ import com.zap.util.Constants;
 import com.zap.util.MinigameList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -46,11 +44,6 @@ public class MinigameEngine extends Engine {
     public static List<Minigame> activeGames = new MinigameList();
 
     @Override
-    public void interrupt() {
-        this.setRunning(false);
-    }
-
-    @Override
     public void execution() {
         if(activeGames.isEmpty()){
             return;
@@ -70,18 +63,6 @@ public class MinigameEngine extends Engine {
             activeGames.add(game);
         }
         gamesToBegin.clear();
-    }
-
-    @Override
-    public void run() {
-        while(this.isRunning()){
-            execution();
-            try {
-                Thread.sleep(this.getFrequency());
-            } catch (InterruptedException ex) {
-                Logger.getLogger(MinigameEngine.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     }
 
 }

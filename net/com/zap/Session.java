@@ -15,7 +15,7 @@
  */
 package com.zap;
 
-import com.zap.game.player.Player;
+import com.zap.game.entity.player.Player;
 import org.jboss.netty.channel.Channel;
 
 /**

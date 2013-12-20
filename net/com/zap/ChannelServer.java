@@ -16,7 +16,7 @@
 package com.zap;
 
 import com.sun.xml.internal.ws.api.message.Packet;
-import com.zap.game.player.Player;
+import com.zap.game.entity.player.Player;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.ExceptionEvent;

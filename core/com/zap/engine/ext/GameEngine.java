@@ -23,25 +23,16 @@ import com.zap.util.Constants;
  *
  * @author Faris
  */
-public class ZapEngine extends Engine {
+public class GameEngine extends Engine {
     
-    public ZapEngine(){
+    public GameEngine(){
         super(Constants.GAME_EXECUTION_RATE);
     }
 
     @Override
-    public void interrupt() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public void execution() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 
-    @Override
-    public void run() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
 }

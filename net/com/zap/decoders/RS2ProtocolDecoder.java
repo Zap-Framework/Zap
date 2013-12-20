@@ -15,7 +15,7 @@
  */
 package com.zap.decoders;
 
-import com.zap.game.player.Player;
+import com.zap.game.entity.player.Player;
 import com.zap.packet.Packet;
 import com.zap.packet.Packet.Type;
 import net.burtlebutle.bob.rand.isaac.ISAAC;

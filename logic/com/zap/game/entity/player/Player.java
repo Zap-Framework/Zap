@@ -14,10 +14,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap.game.player;
+package com.zap.game.entity.player;
 
 import com.sun.xml.internal.ws.api.message.Packet;
-import com.zap.game.map.Location;
+import com.zap.Session;
+import com.zap.game.entity.Entity;
 import com.zap.util.Stream;
 import org.jboss.netty.channel.Channel;
 
@@ -25,9 +26,8 @@ import org.jboss.netty.channel.Channel;
  *
  * @author Faris
  */
-public class Player {
+public class Player extends Entity {
     
-    public Location location;
     public boolean disconnected;
     
     public static final int PACKET_SIZES[] = { 0, 0, 0, 1, -1, 0, 0, 0, 0, 0, // 0
@@ -57,7 +57,7 @@ public class Player {
 		0, 4, 0, 0, 0, 0, -1, 0, -1, 4,// 240
 		0, 0, 6, 6, 0, 0, 0 // 250
 	};
-    public String playerName;
+    private String playerName;
     public String playerName2;
     public String playerPass;
     public Stream inStream = null, outStream = null;
@@ -68,13 +68,12 @@ public class Player {
     public int playerRights;
     public boolean initialized;
     private int clientRevision;
+    public String connectedFrom;
+    private Session session;
 
     public Player(Channel channel, int i) {
+        this.setType(Type.PLAYER);
         throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    public Location getLocation() {
-        return location;
     }
 
     public void queueMessage(Packet packet) {
@@ -97,6 +96,24 @@ public class Player {
      */
     public void setClientRevision(int clientRevision) {
         this.clientRevision = clientRevision;
+    }
+
+    /**
+     * @return the playerName
+     */
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    /**
+     * @param playerName the playerName to set
+     */
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public Session getSession() {
+        return session;
     }
 
 }

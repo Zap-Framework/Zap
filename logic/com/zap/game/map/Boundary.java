@@ -16,7 +16,7 @@
  */
 package com.zap.game.map;
 
-import com.zap.game.player.Player;
+import com.zap.game.entity.player.Player;
 
 /**
  *

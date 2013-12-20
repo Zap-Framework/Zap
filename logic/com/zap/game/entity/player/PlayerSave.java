@@ -14,24 +14,15 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap.game.player;
+package com.zap.game.entity.player;
 
 /**
  *
  * @author Faris
  */
-public class PlayerHandler {
-    public static Object lock;
+public class PlayerSave {
 
-    public static boolean isPlayerOn(String name) {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    public static int getPlayerCount() {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    public static boolean newPlayerClient(Player cl) {
+    public static int loadGame(Player player, String playerName, String playerPass) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 

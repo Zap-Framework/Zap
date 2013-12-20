@@ -26,8 +26,11 @@ import com.zap.util.Constants;
  */
 public class NetworkEngine extends Engine {
     
-    public NetworkEngine(){
+    private int port;
+    
+    public NetworkEngine(int port){
         super(Constants.NETWORK_EXECUTION_RATE);
+        setPort(port);
     }
 
     @Override
@@ -37,7 +40,21 @@ public class NetworkEngine extends Engine {
 
     @Override
     public void execution() {
-        new NetworkInitiator(Constants.SERVER_PORT).constructLoginStreams();
+        new NetworkInitiator(getPort()).constructLoginStreams();
+    }
+
+    /**
+     * @return the port
+     */
+    public int getPort() {
+        return port;
+    }
+
+    /**
+     * @param port the port to set
+     */
+    public void setPort(int port) {
+        this.port = port;
     }
 
 }
