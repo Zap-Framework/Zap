@@ -19,6 +19,12 @@ package com.zap.game.entity.player;
 import com.sun.xml.internal.ws.api.message.Packet;
 import com.zap.Session;
 import com.zap.game.entity.Entity;
+import com.zap.game.entity.EntityType;
+import com.zap.game.entity.movement.StepSynchronizer;
+import com.zap.game.update.UpdateFlags;
+import com.zap.game.update.impl.RealUpdateExecutor;
+import com.zap.packet.PacketDispatcher;
+import com.zap.util.Constants;
 import com.zap.util.Stream;
 import org.jboss.netty.channel.Channel;
 
@@ -57,63 +63,101 @@ public class Player extends Entity {
 		0, 4, 0, 0, 0, 0, -1, 0, -1, 4,// 240
 		0, 0, 6, 6, 0, 0, 0 // 250
 	};
-    private String playerName;
-    public String playerName2;
-    public String playerPass;
-    public Stream inStream = null, outStream = null;
+    
+    public Stream inStream = new Stream(new byte[Constants.BUFFER_SIZE]);
     public boolean saveCharacter;
     public boolean isActive;
     public int packetType;
     public int packetSize;
-    public int playerRights;
     public boolean initialized;
-    private int clientRevision;
+    private PlayerAuth auth;
     public String connectedFrom;
     private Session session;
+    private RealUpdateExecutor updater = new RealUpdateExecutor(this);
+    private PacketDispatcher dispatcher = new PacketDispatcher(this);
+    private UpdateFlags updateFlags = new UpdateFlags();
+    private Stream outStream = updater.getOut();
+    public boolean updateRequired;
 
-    public Player(Channel channel, int i) {
-        this.setType(Type.PLAYER);
-        throw new UnsupportedOperationException("Not yet implemented");
+    public Player(Channel channel, int i, String user, String pass) {
+        this.setType(EntityType.PLAYER);
+        setAuth(new PlayerAuth(user, pass));
+        setSession(channel);
+        this.setStepSynchronizer(new StepSynchronizer(this));
     }
 
     public void queueMessage(Packet packet) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        //throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public void initialize() {
+       // throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+
+    public Session getSession() {
+        return session;
+    }
+    
+    /**
+     * Finds the Entity class' Index
+     * @return the player Index
+     */
+    public int getIndex(){
+        return this.getIndex();
+    }
+
+    /**
+     * @return the auth
+     */
+    public PlayerAuth getAuth() {
+        return auth;
+    }
+
+    /**
+     * @param auth the auth to set
+     */
+    public final void setAuth(PlayerAuth auth) {
+        this.auth = auth;
+    }
+
+    /**
+     * @param session the session to set
+     */
+    public final void setSession(Channel channel) {
+        this.session = new Session(channel);
+    }
+
+    /**
+     * @return the updateFlags
+     */
+    public UpdateFlags getUpdateFlags() {
+        return updateFlags;
+    }
+
+    /**
+     * @return the packetDispatcher
+     */
+    public PacketDispatcher getDispatcher() {
+        return dispatcher;
+    }
+
+    public void setAppearanceUpdateRequired(boolean b) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     /**
-     * @return the clientVersion
+     * @return the outStream
      */
-    public int getClientRevision() {
-        return clientRevision;
+    public Stream getOutStream() {
+        return outStream;
     }
 
     /**
-     * @param clientVersion the clientVersion to set
+     * @return the updater
      */
-    public void setClientRevision(int clientRevision) {
-        this.clientRevision = clientRevision;
-    }
-
-    /**
-     * @return the playerName
-     */
-    public String getPlayerName() {
-        return playerName;
-    }
-
-    /**
-     * @param playerName the playerName to set
-     */
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
-
-    public Session getSession() {
-        return session;
+    public RealUpdateExecutor getUpdater() {
+        return updater;
     }
 
 }

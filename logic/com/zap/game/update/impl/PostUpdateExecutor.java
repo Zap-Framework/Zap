@@ -14,32 +14,36 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap.engine.ext;
+package com.zap.game.update.impl;
 
-import com.zap.Zap;
-import com.zap.engine.Engine;
-import java.util.logging.Logger;
+import com.zap.game.entity.player.Player;
+import com.zap.game.update.UpdateExecutor;
+
 
 /**
- *
- * @author Faris
+ * A {@link SynchronizationTask} which does post-synchronization work for the
+ * specified {@link Player}.
+ * @author Graham
  */
-public class CleanUpEngine extends Engine {
-    
-    /**
-     * A logger used to report error messages.
-     */
-    public static final Logger logger = Logger.getLogger(Zap.class.getName());
-    
-    public CleanUpEngine(){
-        super(60000);
-    }
+public final class PostUpdateExecutor extends UpdateExecutor {
 
-    @Override
-    public void execution() {
-        System.gc();
-        System.runFinalization();
-        logger.info("Framework Clean up has Succesfully executed.");
-    }
+	/**
+	 * The player.
+	 */
+	private final Player player;
+
+	/**
+	 * Creates the {@link PostPlayerSynchronizationTask} for the specified
+	 * player.
+	 * @param player The player.
+	 */
+	public PostUpdateExecutor(Player player) {
+		this.player = player;
+	}
+
+	@Override
+	public void run() {
+		
+	}
 
 }

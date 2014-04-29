@@ -16,7 +16,7 @@
  */
 package com.zap.engine;
 
-import com.zap.engine.ext.MinigameEngine;
+import com.zap.engine.impl.MinigameEngine;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

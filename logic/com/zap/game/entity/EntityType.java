@@ -14,16 +14,27 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap.game.entity.player;
+package com.zap.game.entity;
 
 /**
  *
  * @author Faris
  */
-public class PlayerSave {
-
-    public static int loadGame(Player player, String playerName, String playerPass) {
-        return 0;
-    }
+public enum EntityType {
+    
+    /**
+     * The Entity is of the Player type
+     */
+    PLAYER,
+    
+    /**
+     * The Entity is of the NPC type
+     */
+    NPC,
+    
+    /**
+     * The Entity is of the ground item type, these are often non combat
+     */
+    GROUND_ITEM;
 
 }

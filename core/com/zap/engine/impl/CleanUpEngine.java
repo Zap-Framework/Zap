@@ -14,16 +14,32 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap.game.entity.player;
+package com.zap.engine.impl;
+
+import com.zap.Zap;
+import com.zap.engine.Engine;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Faris
  */
-public class PlayerSave {
+public class CleanUpEngine extends Engine {
+    
+    /**
+     * A logger used to report error messages.
+     */
+    public static final Logger logger = Logger.getLogger(Zap.class.getName());
+    
+    public CleanUpEngine(){
+        super(60000);
+    }
 
-    public static int loadGame(Player player, String playerName, String playerPass) {
-        return 0;
+    @Override
+    public void execution() {
+        System.gc();
+        System.runFinalization();
+        logger.info("Framework Clean up has Succesfully executed.");
     }
 
 }

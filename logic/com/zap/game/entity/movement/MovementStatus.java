@@ -14,16 +14,27 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap.game.entity.player;
+package com.zap.game.entity.movement;
 
 /**
  *
  * @author Faris
  */
-public class PlayerSave {
-
-    public static int loadGame(Player player, String playerName, String playerPass) {
-        return 0;
-    }
+public enum MovementStatus {
+    
+    /**
+     * This entity is currently moving
+     */
+    WALKING,
+    
+    /**
+     * This Entity is still and able to move
+     */
+    STILL,
+    
+    /**
+     * This Entity may be confused or busy E.G Agility task
+     */
+    BUSY;
 
 }

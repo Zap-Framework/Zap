@@ -14,16 +14,47 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap.game.entity.player;
+package com.zap.engine.impl;
+
+import com.zap.NetworkInitiator;
+import com.zap.engine.Engine;
+import com.zap.util.Constants;
 
 /**
  *
  * @author Faris
  */
-public class PlayerSave {
+public class NetworkEngine extends Engine {
+    
+    private int port;
+    
+    public NetworkEngine(int port){
+        super(Constants.NETWORK_EXECUTION_RATE);
+        setPort(port);
+    }
 
-    public static int loadGame(Player player, String playerName, String playerPass) {
-        return 0;
+    @Override
+    public void run() {
+        execution();
+    }
+
+    @Override
+    public void execution() {
+        new NetworkInitiator(getPort()).constructLoginStreams();
+    }
+
+    /**
+     * @return the port
+     */
+    public int getPort() {
+        return port;
+    }
+
+    /**
+     * @param port the port to set
+     */
+    public void setPort(int port) {
+        this.port = port;
     }
 
 }

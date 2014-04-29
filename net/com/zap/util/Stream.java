@@ -363,6 +363,10 @@ public class Stream {
     public void initBitAccess() {
         bitPosition = currentOffset * 8;
     }
+    
+    public void writeBits(int numBits, boolean b){
+        writeBits(numBits, b ? 1 : 0);
+    }
 
     public void writeBits(int numBits, int value) {
         ensureCapacity(((int) Math.ceil(numBits * 8)) * 4);

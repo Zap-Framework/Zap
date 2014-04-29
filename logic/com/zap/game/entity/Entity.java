@@ -16,7 +16,10 @@
  */
 package com.zap.game.entity;
 
+import com.zap.game.entity.movement.MovementStatus;
+import com.zap.game.entity.movement.StepSynchronizer;
 import com.zap.game.map.Location;
+import com.zap.game.map.Region;
 
 /**
  *
@@ -32,12 +35,47 @@ public class Entity {
     /**
      * The Type of Entity this instance is 
      */
-    private Type type;
+    private EntityType type;
     
     /**
      * The Unique user Identity
      */
     private int entityUID;
+    
+    /**
+     * The Welfare status of the Entity
+     */
+    private WelfareStatus welfareStatus;
+    
+    /**
+     * The Current MovementStatus of the Entity
+     */
+    private MovementStatus movementStatus;
+    
+    /**
+     * The Class which contains the movement queue
+     */
+    private StepSynchronizer stepSynchronizer;
+    
+    /**
+     * The location to be moved to in the next movement phase
+     */
+    private Location targetLocation;
+    
+    /**
+     * The Player / NPC this entity is talking to / in combat with
+     */
+    private Entity interatingEntity;
+    
+    /**
+     * The furthest amount of steps able to be taken
+     */
+    private int maxMovementDistance;
+    
+    /**
+     * Last known region found containing this entity
+     */
+    private Region cachedRegion;
 
     /**
      * @return the location
@@ -56,14 +94,14 @@ public class Entity {
     /**
      * @return the type
      */
-    public Type getType() {
+    public EntityType getType() {
         return type;
     }
 
     /**
      * @param type the type to set
      */
-    public void setType(Type type) {
+    public void setType(EntityType type) {
         this.type = type;
     }
 
@@ -80,9 +118,103 @@ public class Entity {
     public void setEntityUID(int entityUID) {
         this.entityUID = entityUID;
     }
-    
-    public enum Type {
-        NPC , PLAYER;
+
+    /**
+     * @return the welfareStatus
+     */
+    public WelfareStatus getWelfareStatus() {
+        return welfareStatus;
+    }
+
+    /**
+     * @param welfareStatus the welfareStatus to set
+     */
+    public void setWelfareStatus(WelfareStatus welfareStatus) {
+        this.welfareStatus = welfareStatus;
+    }
+
+    /**
+     * @return the movementStatus
+     */
+    public MovementStatus getMovementStatus() {
+        return movementStatus;
+    }
+
+    /**
+     * @param movementStatus the movementStatus to set
+     */
+    public void setMovementStatus(MovementStatus movementStatus) {
+        this.movementStatus = movementStatus;
+    }
+
+    /**
+     * @return the targetLocation
+     */
+    public Location getTargetLocation() {
+        return targetLocation;
+    }
+
+    /**
+     * @param targetLocation the targetLocation to set
+     */
+    public void setTargetLocation(Location targetLocation) {
+        this.targetLocation = targetLocation;
+    }
+
+    /**
+     * @return the cachedRegion
+     */
+    public Region getCachedRegion() {
+        return cachedRegion;
+    }
+
+    /**
+     * @param cachedRegion the cachedRegion to set
+     */
+    public void setCachedRegion(Region cachedRegion) {
+        this.cachedRegion = cachedRegion;
+    }
+
+    /**
+     * @return the interatingEntity
+     */
+    public Entity getInteratingEntity() {
+        return interatingEntity;
+    }
+
+    /**
+     * @param interatingEntity the interatingEntity to set
+     */
+    public void setInteratingEntity(Entity interatingEntity) {
+        this.interatingEntity = interatingEntity;
+    }
+
+    /**
+     * @return the maxMovementDistance
+     */
+    public int getMaxMovementDistance() {
+        return maxMovementDistance;
+    }
+
+    /**
+     * @param maxMovementDistance the maxMovementDistance to set
+     */
+    public void setMaxMovementDistance(int maxMovementDistance) {
+        this.maxMovementDistance = maxMovementDistance;
+    }
+
+    /**
+     * @return the stepSynchronizer
+     */
+    public StepSynchronizer getStepSynchronizer() {
+        return stepSynchronizer;
+    }
+
+    /**
+     * @param stepSynchronizer the stepSynchronizer to set
+     */
+    public void setStepSynchronizer(StepSynchronizer stepSynchronizer) {
+        this.stepSynchronizer = stepSynchronizer;
     }
 
 }

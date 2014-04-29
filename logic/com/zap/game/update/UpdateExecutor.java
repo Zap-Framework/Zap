@@ -14,16 +14,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap.game.entity.player;
+package com.zap.game.update;
 
 /**
  *
  * @author Faris
  */
-public class PlayerSave {
-
-    public static int loadGame(Player player, String playerName, String playerPass) {
-        return 0;
-    }
+public abstract class UpdateExecutor implements Runnable {
 
 }

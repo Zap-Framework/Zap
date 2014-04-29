@@ -70,6 +70,8 @@ public class PacketBuilder {
     public PacketBuilder(final int opcode) {
         this(opcode, Type.FIXED);
     }
+    
+    
 
     /**
      * Creates a packet builder with the specified opcode and type.
@@ -90,6 +92,18 @@ public class PacketBuilder {
      */
     public PacketBuilder put(final byte b) {
         payload.writeByte(b);
+        return this;
+    }
+
+    /**
+     * Puts boolean as a bit into byte buffer.
+     *
+     * @param amount the number of bits
+     *
+     * @param value the boolean value
+     */
+    public PacketBuilder putBits(int amount, boolean value) {
+        putBits(amount, value ? 1 : 0);
         return this;
     }
 
@@ -266,6 +280,16 @@ public class PacketBuilder {
      */
     public PacketBuilder putByteC(final int val) {
         put((byte) (-val));
+        return this;
+    }
+
+    /**
+     * Puts the signed byte to the buffer.
+     *
+     * @param value the signed byte
+     */
+    public PacketBuilder putByte(int value) {
+        put((byte) value);
         return this;
     }
 

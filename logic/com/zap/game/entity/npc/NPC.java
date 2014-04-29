@@ -17,6 +17,8 @@
 package com.zap.game.entity.npc;
 
 import com.zap.game.entity.Entity;
+import com.zap.game.entity.EntityType;
+import com.zap.game.entity.movement.StepSynchronizer;
 
 /**
  *
@@ -25,7 +27,8 @@ import com.zap.game.entity.Entity;
 public class NPC extends Entity {
     
     public NPC(){
-        this.setType(Type.NPC);
+        this.setType(EntityType.NPC);
+        this.setStepSynchronizer(new StepSynchronizer(this));
     }
 
 }

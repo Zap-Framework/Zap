@@ -16,11 +16,12 @@
  */
 package com.zap;
 
+import com.zap.dors.DORSBootstrap;
 import com.zap.engine.EngineServer;
-import com.zap.engine.ext.CleanUpEngine;
-import com.zap.engine.ext.GameEngine;
-import com.zap.engine.ext.MinigameEngine;
-import com.zap.engine.ext.NetworkEngine;
+import com.zap.engine.impl.CleanUpEngine;
+import com.zap.engine.impl.GameEngine;
+import com.zap.engine.impl.MinigameEngine;
+import com.zap.engine.impl.NetworkEngine;
 import com.zap.game.entity.Entity;
 import com.zap.game.entity.npc.NPC;
 import com.zap.game.entity.player.Player;
@@ -29,6 +30,7 @@ import java.net.InetSocketAddress;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -57,7 +59,7 @@ public class World {
     public static final Logger logger = Logger.getLogger(Zap.class.getName());
     
     /**
-     * The World Type Initialized
+     * The World Type Initialised
      */
     private WorldType worldType;
     
@@ -123,7 +125,7 @@ public class World {
      * Removes a Player from the game safely
      * @param player 
      */
-    public synchronized void deregisterPlayer(Entity entity){
+    public synchronized void deregisterEntity(Entity entity){
         entityRegistry.remove(entity);
         if(entity instanceof Player){
             playerRegistry.remove(entity);
@@ -140,7 +142,7 @@ public class World {
      */
     public Player getPlayerByName(String name){
         for(Player player : getPlayerList()){
-            if(name.equals(player.getPlayerName())){
+            if(name.equals(player.getAuth().getUsername())){
                 return player;
             }
         }
@@ -178,16 +180,19 @@ public class World {
     }
     
     /**
-     * Handles appropriate protocol in sagely destroying an online object
+     * Handles appropriate protocol in safely destroying an online object
      * @param entity parameter
      */
      private static void DestroyExistance(Entity entity) {
         switch(entity.getType()){
             case PLAYER:
                 Player player = (Player)entity;
+                logger.info(player.getAuth().getUsername()+" has logged out.");
+                player = null;
                 break;
             case NPC:
                 NPC npc = (NPC)entity;
+                npc = null;
                 break;
         }
     }
@@ -225,22 +230,34 @@ public class World {
      */
     private void prepareWorld() {
         logger.info("Starting up Zap Main World on Port:" + getPort());
-        startEngineServer();
+        try {
+            startEngineServer();
+        } catch (Exception ex) {
+            Logger.getLogger(World.class.getName()).log(Level.SEVERE, null, ex);
+        }
         logger.info("Fired up Zap Engine Server...");
+    }
+    
+    /**
+     * Returns the Instance of Engine Server
+     * Belonging to the World
+     */
+    public EngineServer getEngineServer(){
+        return this.engineServer;
     }
      
     /**
      * Starts all required Engines with Engine Server
      */
-    private void startEngineServer(){
+    private void startEngineServer() throws Exception {
         engineServer = new EngineServer();
-        engineServer.initialize();
-        EngineServer.submitEngine(new NetworkEngine(getPort()));
+        getEngineServer().submitEngine(new NetworkEngine(getPort()));
         logger.info("Fired up Netty Login Server...");
-        EngineServer.submitEngine(new MinigameEngine());
-        EngineServer.submitEngine(new GameEngine());
-        EngineServer.submitEngine(new CleanUpEngine());
+        getEngineServer().submitEngine(new MinigameEngine());
+        getEngineServer().submitEngine(new GameEngine());
+        getEngineServer().submitEngine(new CleanUpEngine());
         logger.info("CleanUpEngine Scheduled...");
+        DORSBootstrap.run();
     }
     
     public enum WorldType {

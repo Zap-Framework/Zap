@@ -14,47 +14,34 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap.engine.ext;
+package com.zap.dors;
 
-import com.zap.NetworkInitiator;
-import com.zap.engine.Engine;
+import com.dors.job.Job;
+import com.dors.job.event.EventExecutor;
+import com.dors.job.event.ext.RecurringEvent;
 import com.zap.util.Constants;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Faris
  */
-public class NetworkEngine extends Engine {
+public class DORSBootstrap {
     
-    private int port;
-    
-    public NetworkEngine(int port){
-        super(Constants.NETWORK_EXECUTION_RATE);
-        setPort(port);
-    }
-
-    @Override
-    public void run() {
-        execution();
-    }
-
-    @Override
-    public void execution() {
-        new NetworkInitiator(getPort()).constructLoginStreams();
-    }
-
-    /**
-     * @return the port
-     */
-    public int getPort() {
-        return port;
-    }
-
-    /**
-     * @param port the port to set
-     */
-    public void setPort(int port) {
-        this.port = port;
+    public static void run() throws Exception {
+        Job TaskScheduler = new RecurringEvent(Constants.GAME_EXECUTION_RATE, "Task Force"){
+            @Override
+            public int execute() {
+                DORS.schedule();
+                return EXECUTOR_REPEAT;
+            }
+        };
+        try {
+            EventExecutor.getSingleton().addEvent(TaskScheduler);
+        } catch (Exception ex) {
+            Logger.getLogger(DORSBootstrap.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

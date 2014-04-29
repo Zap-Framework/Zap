@@ -14,16 +14,20 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap.game.entity.player;
+package com.zap.dors;
+
+import com.zap.Zap;
 
 /**
- *
+ * This class serves as the communication medium between 
+ * Zap Framework and the DORS API
+ * 
  * @author Faris
  */
-public class PlayerSave {
+public class DORS {
 
-    public static int loadGame(Player player, String playerName, String playerPass) {
-        return 0;
+    public static void schedule() {
+        Zap.getWorld().getEngineServer().serve();
     }
 
 }

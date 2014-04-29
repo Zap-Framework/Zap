@@ -111,14 +111,11 @@ public class RS2LoginProtocolDecoder extends FrameDecoder {
         if (name.length() > 12) {
             returnCode = 8;
         }
-        Player player = new Player(channel, -1);
-        player.setPlayerName(name);
-        player.playerName2 = player.getPlayerName();
-        player.playerPass = pass;
-        player.outStream.packetEncryption = outCipher;
+        Player player = new Player(channel, -1, name, pass);
+        player.getOutStream().packetEncryption = outCipher;
         player.saveCharacter = false;
         player.isActive = true;
-        player.setClientRevision(clientRevision);
+        player.getAuth().setClientRevision(clientRevision);
         // if (Connection.isNamedBanned(cl.playerName)) {
         //         returnCode = 4;
         // }
@@ -132,7 +129,7 @@ public class RS2LoginProtocolDecoder extends FrameDecoder {
             returnCode = 14;
         }
         if (returnCode == 2) {
-            int load = PlayerSave.loadGame(player, player.getPlayerName(), player.playerPass);
+            int load = PlayerSave.loadGame(player, player.getAuth().getUsername(), player.getAuth().getPassword());
             if (load == 0) {
                 //  cl.addStarter = true;
             }
@@ -160,10 +157,10 @@ public class RS2LoginProtocolDecoder extends FrameDecoder {
             player.packetSize = 0;
             final PacketBuilder bldr = new PacketBuilder();
             bldr.put((byte) 2);
-            if (player.playerRights == 3) {
+            if (player.getAuth().getPlayerRightsAsInt() == 3) {
                 bldr.put((byte) 2);
             } else {
-                bldr.put((byte) player.playerRights);
+                bldr.put((byte) player.getAuth().getPlayerRightsAsInt());
             }
             bldr.put((byte) 0);
             channel.write(bldr.toPacket());

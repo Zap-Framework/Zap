@@ -14,25 +14,22 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap.engine.ext;
+package com.zap.packet;
 
-import com.zap.engine.Engine;
-import com.zap.util.Constants;
+import com.zap.game.entity.player.Player;
+
 
 /**
- *
+ * Packet handler interface.
  * @author Faris
  */
-public class GameEngine extends Engine {
-    
-    public GameEngine(){
-        super(Constants.GAME_EXECUTION_RATE);
-    }
+public interface PacketHandler {
 
-    @Override
-    public void execution() {
-        
-    }
-
+	/**
+	 * Handles an incoming packet.
+	 * @param player the player reference
+	 * @param packet the packet
+	 */
+	public void handlePacket(Player player, Packet packet);
 
 }

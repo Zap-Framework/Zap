@@ -14,16 +14,34 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap.game.entity.player;
+package com.zap.engine.impl;
+
+import com.zap.engine.Engine;
+import com.zap.game.update.UpdateTask;
+import com.zap.game.update.impl.ParallelUpdateTask;
+import com.zap.util.Constants;
 
 /**
  *
  * @author Faris
  */
-public class PlayerSave {
-
-    public static int loadGame(Player player, String playerName, String playerPass) {
-        return 0;
+public class GameEngine extends Engine {
+    
+    public GameEngine(){
+        super(Constants.GAME_EXECUTION_RATE);
     }
+    
+    UpdateTask task = new ParallelUpdateTask();
+
+    @Override
+    public void execution() {
+        
+        /**
+         * Handles the Player/NPC Updating In-Game
+         */
+        task.synchronize();
+        
+    }
+
 
 }

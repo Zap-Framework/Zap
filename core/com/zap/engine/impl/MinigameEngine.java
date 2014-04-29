@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Zap.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zap.engine.ext;
+package com.zap.engine.impl;
 
 import com.zap.engine.Engine;
 import com.zap.game.content.minigame.Minigame;

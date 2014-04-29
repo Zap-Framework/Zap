@@ -28,10 +28,16 @@ public class Zap {
      * only one should exist
      */
     private static World[] world = new World[10];
+    
     /**
      * Whether the server requires an update
      */
     public static boolean updateServer = false;
+    
+    /**
+     * The Timer on Update Server
+     */
+    public static int updateSeconds = 300;
 
     /**
      * The main method
