@@ -16,9 +16,9 @@
  */
 package com.zap.game.content.minigame;
 
+import com.zap.game.entity.player.Player;
 import com.zap.game.map.Boundary;
 import com.zap.game.map.Location;
-import com.zap.game.entity.player.Player;
 import java.util.List;
 
 /**
